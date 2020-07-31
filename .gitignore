@@ -1,1 +1,5 @@
 .env
+
+# Rspecs related
+
+/coverage/*

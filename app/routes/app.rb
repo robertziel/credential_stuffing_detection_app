@@ -1,5 +1,5 @@
 module Routes
-  class Base < Sinatra::Application
+  class App < Sinatra::Application
     before do
       content_type :json
     end

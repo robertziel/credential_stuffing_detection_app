@@ -24,11 +24,15 @@ bundle exec rackup -p 3000
 ```
 
 ## Before commit
-1. Set up overcommit to make sure your code is clean :) :
+Set up overcommit to make sure your code is clean :) :
 
-  ```
-  gem install overcommit
-  bundle install --gemfile=.overgems.rb
-  overcommit --install
-  ```
-  Then you can commit your changes!
+```
+gem install overcommit
+bundle install --gemfile=.overgems.rb
+overcommit --install
+```
+Then you can commit your changes! And don't forget to run specs before:
+
+```
+bundle exec rspec
+```

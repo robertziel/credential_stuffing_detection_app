@@ -9,5 +9,5 @@ class CSDApp < Sinatra::Base
 
   require File.join(root, '/config/initializers/autoloader.rb')
 
-  use Routes::Base
+  use Routes::App
 end
