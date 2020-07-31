@@ -50,8 +50,6 @@ PreCommit:
 
   RuboCop: &rubocop
     enabled: true
-    flags:
-      --disable-pending-cop
 
   Scalastyle:
     enabled: true

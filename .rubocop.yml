@@ -1,11 +1,8 @@
 AllCops:
   Exclude:
     - config/**/*
-    # - db/**/*
+    - db/**/*
 
-Metrics/BlockLength:
-  Exclude:
-    # - 'spec/**/*.rb'
 Metrics/MethodLength:
   Enabled: false
 
@@ -17,8 +14,6 @@ Style/Lambda:
   Enabled: false
 Style/MethodCalledOnDoEndBlock:
   Enabled: true
-  Exclude:
-    # - 'spec/**/*'
 Style/NestedParenthesizedCalls:
   Enabled: false
 Naming/PredicateName:
@@ -34,8 +29,6 @@ Layout/CommentIndentation:
   Enabled: false
 Layout/LineLength:
   Max: 100
-  Exclude:
-    # - 'spec/**/*'
 Layout/MultilineMethodCallIndentation:
   Enabled: false
 Layout/MultilineMethodCallBraceLayout:
@@ -47,15 +40,3 @@ Layout/DotPosition:
 
 Bundler/OrderedGems:
   Enabled: false
-
-
-# The following cops are added between 0.50.0 and 0.88.0.
-# The configurations are default.
-# If you want to use a cop by default, remove a configuration for the cop from here.
-# If you want to disable a cop, change `Enabled` to false.
-
-
-# The following cops are added between 0.76.0 and 0.88.0.
-# The configurations are default.
-# If you want to use a cop by default, remove a configuration for the cop from here.
-# If you want to disable a cop, change `Enabled` to false.

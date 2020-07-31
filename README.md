@@ -2,11 +2,38 @@
 
 ## API
 
-1. `PUT /detect`
+`PUT /detect`
+
+  Parameters:
+  * **email** | string
+  * **event_name** | string
+  * **ip** | string
+
+
+  Possible feedback:
+  * Success:
 
   ```json
   {
-    result: false
+    "detected_attack": false
+  }
+  ```
+
+  * If wrong parameters passed:
+
+  ```json
+  {
+    "errors": {
+      "email": [
+        "can't be blank"
+      ],
+      "event_name": [
+        "can't be blank"
+      ],
+      "ip": [
+        "can't be blank"
+      ]
+    }
   }
   ```
 
