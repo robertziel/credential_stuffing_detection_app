@@ -1,0 +1,61 @@
+AllCops:
+  Exclude:
+    - config/**/*
+    # - db/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    # - 'spec/**/*.rb'
+Metrics/MethodLength:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Lambda:
+  Enabled: false
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+  Exclude:
+    # - 'spec/**/*'
+Style/NestedParenthesizedCalls:
+  Enabled: false
+Naming/PredicateName:
+  Enabled: false
+
+Layout/ParameterAlignment:
+  Enabled: false
+Layout/HashAlignment:
+  Enabled: false
+Layout/AccessModifierIndentation:
+  Enabled: false
+Layout/CommentIndentation:
+  Enabled: false
+Layout/LineLength:
+  Max: 100
+  Exclude:
+    # - 'spec/**/*'
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+Bundler/OrderedGems:
+  Enabled: false
+
+
+# The following cops are added between 0.50.0 and 0.88.0.
+# The configurations are default.
+# If you want to use a cop by default, remove a configuration for the cop from here.
+# If you want to disable a cop, change `Enabled` to false.
+
+
+# The following cops are added between 0.76.0 and 0.88.0.
+# The configurations are default.
+# If you want to use a cop by default, remove a configuration for the cop from here.
+# If you want to disable a cop, change `Enabled` to false.
