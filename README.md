@@ -38,7 +38,7 @@
   ```
 
 
-## Setup
+## Setup locally (development)
 
 Make sure your console uses right environment as default
 
@@ -48,9 +48,9 @@ export RACK_ENV=[development,staging,production]
 
 Use `.env.example` to set environmental variables:
 ```bash
-DATABASE_NAME
-DATABASE_PASSWORD # in production only
-DATABASE_USERNAME
+POSTGRES_DB
+POSTGRES_PASSWORD # in production only
+POSTGRES_USERNAME
 POSTGRES_HOST
 ```
 
@@ -71,4 +71,28 @@ Then you can commit your changes! And don't forget to run specs before:
 
 ```bash
 bundle exec rspec
+```
+
+## Docker (production)
+
+Prepare env file:
+```bash
+cp .env.docker.example .env.docker
+```
+
+Build:
+```bash
+docker-compose build
+```
+Set up database (run always after migration file added):
+```bash
+docker-compose run web rake db:create db:migrate
+```
+Start containers and check localhost:8080:
+```bash
+docker-compose up
+```
+Shut down containers:
+```bash
+docker-compose down
 ```
