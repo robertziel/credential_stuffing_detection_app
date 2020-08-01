@@ -125,3 +125,4 @@ IP_EMAILS_LIMIT | 2 | N | emails limit used to cause IP ban
 ### To improve
 
 * Only data not older than 5 seconds ago in table ***inputs*** are usable, it may be useful removing older ones
+* How can we handle ***DDoS Attack***?
