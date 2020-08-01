@@ -43,7 +43,7 @@
 Make sure your console uses right environment as default
 
 ```bash
-export RACK_ENV=[development,staging,production]
+export RACK_ENV=development
 ```
 
 Use `.env.example` to set environmental variables:
@@ -110,3 +110,18 @@ Try | Requests [#/sec] (mean) | Puma | Description
 --- | --- | --- | ---
 1 | 176.73 | Not set | Save Input to database only
 2 | 452.74 | Concurrency: 4 | Save Input to database, detect attack
+
+## Constants
+
+Following constants can be set by adding them to `.env` or `.env.docker`
+
+Env name | Default value | | Description
+--- | --- | --- | ---
+IP_BAN_TIME | 30 (sec) | X | how long an IP is banned in seconds
+IP_LIMIT | 10 | Y | limit one IP can be used in period of time (Z)
+SAMPLE_PERIOD | 5 (sec) | Z | period of time in seconds in which limits (Y) and (N) cannot be reached
+IP_EMAILS_LIMIT | 2 | N | emails limit used to cause IP ban
+
+### To improve
+
+* Only data not older than 5 seconds ago in table ***inputs*** are usable, it may be useful removing older ones

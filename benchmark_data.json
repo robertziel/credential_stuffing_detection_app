@@ -1,5 +1,5 @@
 {
   "email": "hello@robertz.co",
-  "event_name": "log_in",
+  "event_name": "failed_log_in",
   "ip": "0.0.0.0"
 }
