@@ -96,3 +96,14 @@ Shut down containers:
 ```bash
 docker-compose down
 ```
+
+## Apache Bench performance tests
+
+If we have docker running properly we can do following performance test:
+`ab -n 5000 -c 100 -u benchmark_data.json http://localhost:8080/detect`
+(If above command does not work you can install it on mac using brew `brew install homebrew/apache/ab`)
+
+
+Commit | Requests [#/sec] (mean) | Description
+--- | --- | ---
+79409b51d41376fa3a6d8321ea7976a21d88ab4c | 192.66 | Save input to database only
