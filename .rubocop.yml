@@ -3,6 +3,9 @@ AllCops:
     - config/**/*
     - db/**/*
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
 Metrics/MethodLength:
   Enabled: false
 

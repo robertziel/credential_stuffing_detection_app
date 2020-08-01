@@ -15,12 +15,11 @@ ActiveRecord::Schema.define(version: 2020_07_31_151450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "inputs", force: :cascade do |t|
+  create_table "inputs", id: false, force: :cascade do |t|
     t.string "email", null: false
     t.string "event_name", null: false
     t.inet "ip", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "detected_at", default: -> { "now()" }, null: false
   end
 
 end

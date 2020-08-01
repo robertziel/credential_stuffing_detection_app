@@ -5,19 +5,35 @@ module Routes
     end
 
     put '/detect' do
-      input = Input.new(input_params)
-
       if input.save
-        { detected_attack: false }.to_json
+        response_json
       else
-        { errors: input.errors.messages }.to_json
+        error_json
       end
     end
 
     private
 
+    # input
+
+    def input
+      @input ||= Input.new(input_params)
+    end
+
     def input_params
-      params.slice(:email, :event_name, :ip)
+      @input_params ||= params.slice(:email, :event_name, :ip)
+    end
+
+    # responses
+
+    def error_json
+      { errors: input.errors.messages }.to_json
+    end
+
+    def response_json
+      detected_attack = Input.detected_attack?(input_params)
+
+      { detected_attack: detected_attack }.to_json
     end
   end
 end
