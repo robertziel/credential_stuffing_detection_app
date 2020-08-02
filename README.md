@@ -15,7 +15,7 @@
 
   ```json
   {
-    "detected_attack": false
+      "detected_attack": false/true
   }
   ```
 
@@ -23,17 +23,17 @@
 
   ```json
   {
-    "errors": {
-      "email": [
-        "can't be blank"
-      ],
-      "event_name": [
-        "can't be blank"
-      ],
-      "ip": [
-        "can't be blank"
-      ]
-    }
+      "errors": {
+        "email": [
+          "can't be blank"
+        ],
+        "event_name": [
+          "can't be blank"
+        ],
+        "ip": [
+          "can't be blank"
+        ]
+      }
   }
   ```
 
@@ -110,7 +110,7 @@ Try | Requests [#/sec] (mean) | Puma | Description
 --- | --- | --- | ---
 1 | 176.73 | Not set | Save Input to database only
 2 | 452.74 | Concurrency: 4 | Save Input to database, detect attack
-3 | 231.78 | Concurrency: 4 | Redesigned database
+3 | 510.84 | Concurrency: 4 | Redesigned database
 
 ## Constants
 
