@@ -36,14 +36,6 @@ ActiveRecord::Schema.define(version: 2020_08_01_215121) do
     t.index ["email_id"], name: "index_events_on_email_id"
   end
 
-  create_table "inputs", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "event_name", null: false
-    t.inet "ip", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   add_foreign_key "emails", "addresses"
   add_foreign_key "events", "emails"
 end
