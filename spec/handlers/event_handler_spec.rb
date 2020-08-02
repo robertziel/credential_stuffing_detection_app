@@ -85,10 +85,48 @@ describe EventHandler do
   end
 
   describe '#detected_attack?' do
-    it ''
+    let(:address) { create :address, ip: params[:ip] }
+
+    subject do
+      object.detected_attack?
+    end
+
+    before do
+      allow_any_instance_of(EventHandler).to receive(:address) { address }
+    end
+
+    context 'when address is banned' do
+      before do
+        allow_any_instance_of(EventHandler).to receive(:banned?) { true }
+      end
+
+      it 'returns true' do
+        expect(subject).to be true
+      end
+    end
+
+    context 'when address is not banned' do
+      before do
+        allow_any_instance_of(EventHandler).to receive(:banned?) { false }
+      end
+
+      it 'returns reached_limits? value' do
+        value = 'false'
+        allow_any_instance_of(EventHandler).to receive(:reached_limits?) { value }
+        expect(subject).to be value
+      end
+    end
+  end
+
+  describe '#banned?' do
+    it 'test both  banned_at nil and present'
   end
 
   describe '#address' do
+    it ''
+  end
+
+  describe '#reached_limits?' do
     it ''
   end
 end

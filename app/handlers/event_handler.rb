@@ -22,13 +22,18 @@ class EventHandler
   end
 
   def detected_attack?
-    # TODO: test both  banned_at nil and present
-    return true if address.banned_at.present? && address.banned_at > CSDApp.ip_ban_time.seconds
-
-    false # TODO: Detect if limits reached
+    banned? || reached_limits?
   end
 
   private
+
+  def banned?
+    address.banned_at.present? && address.banned_at > CSDApp.ip_ban_time.seconds
+  end
+
+  def reached_limits?
+    false
+  end
 
   def address
     @address ||= Address.find_or_create_by(ip: ip)
