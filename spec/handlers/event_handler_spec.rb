@@ -110,10 +110,29 @@ describe EventHandler do
         allow_any_instance_of(EventHandler).to receive(:banned?) { false }
       end
 
-      it 'returns reached_limits? value' do
-        value = 'false'
-        allow_any_instance_of(EventHandler).to receive(:reached_limits?) { value }
-        expect(subject).to be value
+      context 'when reached_limits? returns true' do
+        before do
+          allow_any_instance_of(EventHandler).to receive(:reached_limits?) { true }
+        end
+
+        it 'returns true' do
+          expect(subject).to be true
+        end
+
+        it 'calls address ban! method' do
+          expect_any_instance_of(Address).to receive(:ban!).with(no_args).and_call_original
+          subject
+        end
+      end
+
+      context 'when reached_limits? returns false' do
+        before do
+          allow_any_instance_of(EventHandler).to receive(:reached_limits?) { false }
+        end
+
+        it 'returns true' do
+          expect(subject).to be false
+        end
       end
     end
   end

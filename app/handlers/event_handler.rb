@@ -21,7 +21,11 @@ class EventHandler
   end
 
   def detected_attack?
-    banned? || reached_limits?
+    return true if banned?
+    return false unless reached_limits?
+
+    address.ban!
+    true
   end
 
   private
