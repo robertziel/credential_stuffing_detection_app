@@ -14,6 +14,11 @@ describe CSDApp do
       put '/detect', params
     end
 
+    it 'initializes EventHandler with params' do
+      expect(EventHandler).to receive(:new).with(params).and_call_original
+      subject
+    end
+
     context 'not valid params' do
       before do
         allow_any_instance_of(EventHandler).to receive(:save) { false }
