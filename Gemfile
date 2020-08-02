@@ -25,6 +25,7 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec'
   gem 'rack-test'
   gem 'shoulda'

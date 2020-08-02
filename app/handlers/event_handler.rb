@@ -30,9 +30,22 @@ class EventHandler
     address.banned_at.present? && address.banned_at > CSDApp.ip_ban_time.seconds
   end
 
+  # Reached limits methods
+
   def reached_limits?
-    false
+    datetime = CSDApp.sample_period.seconds.ago
+    reached_emails_limit?(datetime) && reached_requests_limit?(datetime)
   end
+
+  def reached_emails_limit?(datetime)
+    event.emails.where('last_detected_at > ?', datetime).count > CSDApp.ip_emails_limit
+  end
+
+  def reached_requests_limit?(datetime)
+    event.requests.where('detected_at > ?', datetime).count > CSDApp.ip_requests_limit
+  end
+
+  # Models objects
 
   def address
     @address ||= Address.find_or_create_by(ip: ip)

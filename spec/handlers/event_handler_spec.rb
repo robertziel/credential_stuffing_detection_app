@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe EventHandler do
+  let(:address) { create :address, ip: params[:ip] }
+  let(:event) { create :event, address: address, name: params[:event_name] }
+
   let(:object) { described_class.new(params) }
   let(:params) do
     {
@@ -45,9 +48,6 @@ describe EventHandler do
     end
 
     context 'when params valid' do
-      let(:address) { create :address, ip: params[:ip] }
-      let(:event) { create :event, address: address, name: params[:event_name] }
-
       shared_examples :creates_event do
         it 'creates a new request' do
           expect { subject }.to change { event.requests.count }
@@ -87,8 +87,6 @@ describe EventHandler do
   end
 
   describe '#detected_attack?' do
-    let(:address) { create :address, ip: params[:ip] }
-
     subject do
       object.detected_attack?
     end
@@ -125,7 +123,41 @@ describe EventHandler do
   end
 
   describe '#reached_limits?' do
-    it ''
+    subject do
+      object.send(:reached_limits?)
+    end
+
+    context 'when emails limit reached' do
+      before do
+        (CSDApp.ip_emails_limit + 1).times do
+          create :email, event: event
+        end
+      end
+
+      context 'when requests limit reached' do
+        before do
+          (CSDApp.ip_requests_limit + 1).times do
+            create :request, event: event
+          end
+        end
+
+        it 'returns true' do
+          expect(subject).to be true
+        end
+      end
+
+      context 'when requests limit not reached' do
+        before do
+          CSDApp.ip_requests_limit.times do
+            create :request, event: event
+          end
+        end
+
+        it 'returns false' do
+          expect(subject).to be false
+        end
+      end
+    end
   end
 
   describe '#address' do

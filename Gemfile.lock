@@ -40,6 +40,8 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     loofah (2.6.0)
@@ -130,6 +132,7 @@ DEPENDENCIES
   database_cleaner
   dotenv
   factory_bot_rails
+  faker
   pg
   pry
   puma

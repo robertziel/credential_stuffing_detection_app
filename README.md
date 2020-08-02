@@ -120,7 +120,7 @@ Following constants can be set by adding them to `.env` or `.env.docker`
 Env name | Default value | | Description
 --- | --- | --- | ---
 IP_BAN_TIME | 30 (sec) | X | how long an IP is banned in seconds
-IP_LIMIT | 10 | Y | limit one IP can make event in period of time (Z)
+IP_REQUESTS_LIMIT | 10 | Y | limit one IP can make event in period of time (Z)
 SAMPLE_PERIOD | 5 (sec) | Z | period of time in seconds in which limits (Y) and (N) cannot be reached
 IP_EMAILS_LIMIT | 2 | N | emails limit used to cause IP ban
 
