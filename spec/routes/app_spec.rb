@@ -25,9 +25,12 @@ describe CSDApp do
       end
 
       it 'returns errors' do
+        errors = 'errors'
+        allow_any_instance_of(ActiveModel::Errors).to receive(:messages) { errors }
+
         subject
         expect(last_response).to be_ok
-        expect(last_response_body_to_json[:errors]).not_to eq nil
+        expect(last_response_body_to_json[:errors]).to eq errors
       end
     end
 

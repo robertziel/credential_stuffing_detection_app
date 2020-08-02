@@ -1,5 +1,11 @@
 class EventHandler
-  attr_reader :email, :ip, :name
+  include ActiveModel::Validations
+
+  attr_accessor :email, :ip, :name
+
+  validates :email, :ip, :name, presence: true
+  validates :email, format: { with: VALID_EMAIL_REGEX }
+  validates :ip, format: { with: VALID_IP_REGEX }
 
   def initialize(params)
     @email = params[:email]
@@ -19,10 +25,6 @@ class EventHandler
     return true if address.banned_at.present? && address.banned_at > CSDApp.ip_ban_time.seconds
 
     false # TODO: Detect if limits reached
-  end
-
-  def errors
-    [] # TODO: add validation errors
   end
 
   private

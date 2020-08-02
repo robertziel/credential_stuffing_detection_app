@@ -25,7 +25,7 @@ module Routes
     # responses
 
     def error_json
-      { errors: event_handler.errors }.to_json
+      { errors: event_handler.errors.messages }.to_json
     end
 
     def response_json

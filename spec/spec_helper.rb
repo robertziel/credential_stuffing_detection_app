@@ -17,6 +17,7 @@ end
 RSpec.configure do |config|
   config.include Rack::Test::Methods
   config.include ResponseHelper
+  config.include Shoulda::Matchers::ActiveModel
   config.include Shoulda::Matchers::ActiveRecord
 
   config.expect_with :rspec do |expectations|
