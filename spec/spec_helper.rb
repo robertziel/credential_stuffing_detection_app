@@ -9,12 +9,14 @@ require 'rspec'
 require 'rack/test'
 
 Dir[File.join(CSDApp.root, 'spec/support/**/*.rb')].sort.each { |f| require f }
+Dir[File.join(CSDApp.root, 'spec/factories/**/*.rb')].sort.each { |f| require f }
 
 def app
   described_class
 end
 
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
   config.include Rack::Test::Methods
   config.include ResponseHelper
   config.include Shoulda::Matchers::ActiveModel

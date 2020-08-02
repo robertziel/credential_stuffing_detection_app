@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CSDApp do
-  describe 'PUT /detect' do
+  describe '#PUT /detect' do
     let(:params) do
       {
         email: 'hello@robertz.co',
@@ -19,7 +19,7 @@ describe CSDApp do
       subject
     end
 
-    context 'not valid params' do
+    context 'when not valid params' do
       before do
         allow_any_instance_of(EventHandler).to receive(:save) { false }
       end
@@ -34,7 +34,7 @@ describe CSDApp do
       end
     end
 
-    context 'valid params' do
+    context 'when valid params' do
       before do
         allow_any_instance_of(EventHandler).to receive(:save) { true }
       end

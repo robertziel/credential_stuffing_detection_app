@@ -41,5 +41,9 @@ Layout/EmptyLinesAroundClassBody:
 Layout/DotPosition:
   EnforcedStyle: trailing
 
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"
+
 Bundler/OrderedGems:
   Enabled: false
