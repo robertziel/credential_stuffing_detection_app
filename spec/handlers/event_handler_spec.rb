@@ -13,18 +13,18 @@ describe EventHandler do
   describe '#validations' do
     subject { object }
 
-    describe '#email' do
+    describe ' for email' do
       it { should validate_presence_of(:email) }
       it { should allow_value('hello@robertz.co').for(:email) }
       it { should_not allow_value('hello@robertzco').for(:email) }
       it { should_not allow_value('hellorobertz.co').for(:email) }
     end
 
-    describe '#ip' do
+    describe 'for ip' do
       it { should validate_presence_of(:ip) }
     end
 
-    describe '#event_name' do
+    describe 'for event_name' do
       it { should validate_presence_of(:event_name) }
     end
   end
