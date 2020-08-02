@@ -24,8 +24,8 @@ describe EventHandler do
       it { should validate_presence_of(:ip) }
     end
 
-    describe '#name' do
-      it { should validate_presence_of(:name) }
+    describe '#event_name' do
+      it { should validate_presence_of(:event_name) }
     end
   end
 
