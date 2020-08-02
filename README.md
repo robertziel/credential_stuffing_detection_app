@@ -110,6 +110,7 @@ Try | Requests [#/sec] (mean) | Puma | Description
 --- | --- | --- | ---
 1 | 176.73 | Not set | Save Input to database only
 2 | 452.74 | Concurrency: 4 | Save Input to database, detect attack
+3 | 231.78 | Concurrency: 4 | Redesigned database
 
 ## Constants
 
