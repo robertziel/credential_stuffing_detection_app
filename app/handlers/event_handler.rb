@@ -14,9 +14,10 @@ class EventHandler
   end
 
   def save
+    return false unless valid?
+
     email_obj = address.emails.find_or_initialize_by(value: email)
     email_obj.events << Event.new(name: name)
-
     email_obj.save! # TODO: Assign right last_detected_at to event_obj
   end
 
