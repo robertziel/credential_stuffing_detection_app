@@ -23,15 +23,15 @@ ActiveRecord::Schema.define(version: 2020_08_01_215121) do
 
   create_table "emails", force: :cascade do |t|
     t.string "value", null: false
-    t.datetime "last_detected_at", default: -> { "now()" }, null: false
+    t.datetime "last_detected_at", null: false
     t.bigint "address_id"
     t.index ["address_id"], name: "index_emails_on_address_id"
     t.index ["value"], name: "index_emails_on_value", unique: true
   end
 
-  create_table "events", id: false, force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "detected_at", default: -> { "now()" }, null: false
+    t.datetime "detected_at", null: false
     t.bigint "email_id"
     t.index ["email_id"], name: "index_events_on_email_id"
   end

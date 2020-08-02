@@ -16,9 +16,9 @@ class EventHandler
   def save
     return false unless valid?
 
-    email_obj = address.emails.find_or_initialize_by(value: email)
-    email_obj.events << Event.new(name: event_name)
-    email_obj.save! # TODO: Assign right last_detected_at to event_obj
+    email_obj.events << event_obj
+    email_obj.last_detected_at = event_obj.detected_at
+    email_obj.save!
   end
 
   def detected_attack?
@@ -34,7 +34,11 @@ class EventHandler
     @address ||= Address.find_or_create_by(ip: ip)
   end
 
-  def valid_params?
-    true
+  def email_obj
+    @email_obj ||= address.emails.find_or_initialize_by(value: email)
+  end
+
+  def event_obj
+    @event_obj ||= Event.new(name: event_name, detected_at: DateTime.now)
   end
 end

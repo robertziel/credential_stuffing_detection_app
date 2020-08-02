@@ -52,7 +52,11 @@ describe EventHandler do
           expect { subject }.to change { address.events.count }
         end
 
-        it "assigns email's last_detected_at the same as last event's detected_at"
+        it "assigns email's last_detected_at the same as last event's detected_at" do
+          subject
+          email = address.emails.last
+          expect(email.last_detected_at).to eq email.events.last.detected_at
+        end
       end
 
       before do
