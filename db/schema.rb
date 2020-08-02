@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_215121) do
+ActiveRecord::Schema.define(version: 2020_08_02_154229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,18 +24,24 @@ ActiveRecord::Schema.define(version: 2020_08_01_215121) do
   create_table "emails", force: :cascade do |t|
     t.string "value", null: false
     t.datetime "last_detected_at", null: false
-    t.bigint "address_id"
-    t.index ["address_id"], name: "index_emails_on_address_id"
-    t.index ["value"], name: "index_emails_on_value", unique: true
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_emails_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "detected_at", null: false
-    t.bigint "email_id"
-    t.index ["email_id"], name: "index_events_on_email_id"
+    t.bigint "address_id"
+    t.index ["address_id"], name: "index_events_on_address_id"
+    t.index ["name"], name: "index_events_on_name", unique: true
   end
 
-  add_foreign_key "emails", "addresses"
-  add_foreign_key "events", "emails"
+  create_table "requests", force: :cascade do |t|
+    t.datetime "detected_at", null: false
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_requests_on_event_id"
+  end
+
+  add_foreign_key "emails", "events"
+  add_foreign_key "events", "addresses"
+  add_foreign_key "requests", "events"
 end

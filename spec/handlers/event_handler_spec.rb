@@ -46,29 +46,31 @@ describe EventHandler do
 
     context 'when params valid' do
       let(:address) { create :address, ip: params[:ip] }
+      let(:event) { create :event, address: address, name: params[:event_name] }
 
       shared_examples :creates_event do
-        it 'creates a new event' do
-          expect { subject }.to change { address.events.count }
+        it 'creates a new request' do
+          expect { subject }.to change { event.requests.count }
         end
 
         it "assigns email's last_detected_at the same as last event's detected_at" do
           subject
-          email = address.emails.last
-          expect(email.last_detected_at).to eq email.events.last.detected_at
+          email_detected_at = event.emails.last.last_detected_at
+          request_detected_at = event.requests.last.detected_at
+          expect(email_detected_at).to eq request_detected_at
         end
       end
 
       before do
         allow_any_instance_of(EventHandler).to receive(:valid?) { true }
-        allow_any_instance_of(EventHandler).to receive(:address) { address }
+        allow_any_instance_of(EventHandler).to receive(:event) { event }
       end
 
       context 'when email exists' do
-        let!(:email) { create :email, address: address, value: params[:email] }
+        let!(:email) { create :email, event: event, value: params[:email] }
 
         it 'uses existing email' do
-          expect { subject }.to change { address.emails.count }.by(0)
+          expect { subject }.to change { event.emails.count }.by(0)
         end
 
         include_examples :creates_event
@@ -76,7 +78,7 @@ describe EventHandler do
 
       context 'when email does not exist' do
         it 'creates a new email' do
-          expect { subject }.to change { address.emails.count }
+          expect { subject }.to change { event.emails.count }
         end
 
         include_examples :creates_event
@@ -122,11 +124,15 @@ describe EventHandler do
     it 'test both  banned_at nil and present'
   end
 
+  describe '#reached_limits?' do
+    it ''
+  end
+
   describe '#address' do
     it ''
   end
 
-  describe '#reached_limits?' do
+  describe '#event' do
     it ''
   end
 end

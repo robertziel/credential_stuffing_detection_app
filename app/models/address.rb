@@ -1,4 +1,3 @@
 class Address < ApplicationRecord
-  has_many :emails, dependent: :destroy
-  has_many :events, through: :emails
+  has_many :events, dependent: :destroy
 end
