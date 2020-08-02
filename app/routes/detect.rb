@@ -5,7 +5,7 @@ module Routes
     end
 
     put '/detect' do
-      if input.save
+      if event_handler.save # TODO: It's not worth saving events if address is banned
         response_json
       else
         error_json
@@ -14,26 +14,22 @@ module Routes
 
     private
 
-    # input
-
-    def input
-      @input ||= Input.new(input_params)
+    def event_handler
+      @event_handler ||= EventHandler.new(event_params)
     end
 
-    def input_params
-      @input_params ||= params.slice(:email, :event_name, :ip)
+    def event_params
+      params.slice(:email, :event_name, :ip)
     end
 
     # responses
 
     def error_json
-      { errors: input.errors.messages }.to_json
+      { errors: event_handler.errors }.to_json
     end
 
     def response_json
-      detected_attack = Input.detected_attack?(input_params)
-
-      { detected_attack: detected_attack }.to_json
+      { detected_attack: event_handler.detected_attack? }.to_json
     end
   end
 end

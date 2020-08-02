@@ -2,12 +2,22 @@ require 'spec_helper'
 
 describe CSDApp do
   describe 'PUT /detect' do
+    let(:params) do
+      {
+        email: 'hello@robertz.co',
+        event_name: 'log_in',
+        ip: '0.0.0.0'
+      }
+    end
+
     subject do
       put '/detect', params
     end
 
     context 'not valid params' do
-      let(:params) { {} }
+      before do
+        allow_any_instance_of(EventHandler).to receive(:save) { false }
+      end
 
       it 'returns errors' do
         subject
@@ -17,17 +27,13 @@ describe CSDApp do
     end
 
     context 'valid params' do
-      let(:params) do
-        {
-          email: 'hello@robertz.co',
-          event_name: 'log_in',
-          ip: '0.0.0.0'
-        }
+      before do
+        allow_any_instance_of(EventHandler).to receive(:save) { true }
       end
 
       it 'returns detected_attack' do
         value = 'value'
-        allow(Input).to receive(:detected_attack?).with(params) { value }
+        allow_any_instance_of(EventHandler).to receive(:detected_attack?) { value }
 
         subject
         expect(last_response).to be_ok

@@ -52,6 +52,12 @@ GEM
       rspec-support (~> 3.9.0)
     rspec-support (3.9.3)
     ruby2_keywords (0.0.2)
+    shoulda (4.0.0)
+      shoulda-context (~> 2.0)
+      shoulda-matchers (~> 4.0)
+    shoulda-context (2.0.0)
+    shoulda-matchers (4.3.0)
+      activesupport (>= 4.2.0)
     simplecov (0.18.5)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -88,6 +94,7 @@ DEPENDENCIES
   rack-test
   rake
   rspec
+  shoulda
   simplecov
   sinatra
   sinatra-activerecord
