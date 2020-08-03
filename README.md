@@ -84,9 +84,9 @@ Build:
 ```bash
 docker-compose build
 ```
-Set up database (run always after migration file added):
+Set up database and load sample data (for performance test):
 ```bash
-docker-compose run web rake db:create db:migrate
+docker-compose run web rake db:create db:migrate db:seed
 ```
 Start containers and check localhost:8080:
 ```bash
@@ -105,14 +105,20 @@ If we have docker running properly we can do following performance test:
 
 (If above command does not work you can install it on mac using brew `brew install homebrew/apache/ab`)
 
+#### Tests results
 
-Try | Requests [#/sec] (mean) | Puma | Description
---- | --- | --- | ---
-1 | 176.73 | Not set | Save Input to database only
-2 | 452.74 | Concurrency: 4 | Save Input to database, detect attack
-3 | 510.84 | Concurrency: 4 | Redesigned database
-4 | 477.53 | Concurrency: 4 | Second database redesign
-5 | 457.02 | Concurrency: 4 | Add `reached_limits?` check
+Each address has ***1 event***\
+Each event has ***50 emails*** and ***250 requests***
+
+To prepare sample data run `rake db:seed` locally or `docker-compose run web rake db:seed` on docker
+
+Number of Addresses seeded | Requests [#/sec] (mean)
+--- | ---
+1 | 469.39
+10 | 449.21
+100 | 443.00
+1 000 | 400.36
+10 000 | 396.71
 
 ## Constants
 
