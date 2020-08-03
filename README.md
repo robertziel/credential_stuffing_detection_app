@@ -120,6 +120,21 @@ Number of Addresses seeded | Requests [#/sec] (mean)
 1 000 | 400.36
 10 000 | 396.71
 
+#### Slowest areas analysis:
+
+Best way to detect slowest queries in app is to use services like Scout or New Relic. But we can clearly theoretically we can expect some parts to be slow and that some day they need to be improved as traffic grows.
+
+* ***Address*** is the first element searched in database. As far as traffic is low (and we have below 10 million rows in table) it should not be an issue. As records are searched by ***ip***, index should be changed to `inet_ops`.
+
+* ***Event*** is currently mainly searched by index in foreign_key address_id and it's name. One address probably never has many events but to improve seach we may compbine index consisting address_id and name
+
+* ***Email*** this table may grow quickly and cause performance issues in the future. First of all we should add index for ***event_id, last_detected_at*** and ***event_id, value***. Secondly, we should consider removing old data if no longer are necessary.
+
+* ***Request*** this table is the biggest issue in the app as it grows constantly with traffic and it grows more than any other table. As in email table we should consider adding index ***event_id, detected_at*** and deleting old data.
+
+* In case of banned address we should consider not saving any further data about it's requests.
+
+
 ## Constants
 
 Following constants can be set by adding them to `.env` or `.env.docker`
