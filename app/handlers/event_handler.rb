@@ -31,7 +31,7 @@ class EventHandler
   private
 
   def banned?
-    address.banned_at.present? && address.banned_at > CSDApp.ip_ban_time.seconds
+    address.banned_at.present? && address.banned_at > CSDApp.ip_ban_time.seconds.ago
   end
 
   # Reached limits methods

@@ -138,7 +138,37 @@ describe EventHandler do
   end
 
   describe '#banned?' do
-    it 'test both  banned_at nil and present'
+    subject do
+      object.send(:banned?)
+    end
+
+    before do
+      address.update_column(:banned_at, banned_at)
+    end
+    # address.banned_at.present? && address.banned_at > CSDApp.ip_ban_time.seconds
+    context 'when banned_at is nil' do
+      let(:banned_at) { nil }
+
+      it 'returns false' do
+        expect(subject).to be false
+      end
+    end
+
+    context 'when banned less than ip_ban_time seconds ago' do
+      let(:banned_at) { (CSDApp.ip_ban_time - 1).seconds.ago }
+
+      it 'returns true' do
+        expect(subject).to be true
+      end
+    end
+
+    context 'when banned more than ip_ban_time seconds ago' do
+      let(:banned_at) { CSDApp.ip_ban_time.seconds.ago }
+
+      it 'returns false' do
+        expect(subject).to be false
+      end
+    end
   end
 
   describe '#reached_limits?' do
