@@ -37,16 +37,15 @@ class EventHandler
   # Reached limits methods
 
   def reached_limits?
-    datetime = CSDApp.sample_period.seconds.ago
-    reached_emails_limit?(datetime) && reached_requests_limit?(datetime)
+    reached_emails_limit? && reached_requests_limit?
   end
 
-  def reached_emails_limit?(datetime)
-    event.emails.where('last_detected_at > ?', datetime).count > CSDApp.ip_emails_limit
+  def reached_emails_limit?
+    event.emails.recently_detected.count > CSDApp.ip_emails_limit
   end
 
-  def reached_requests_limit?(datetime)
-    event.requests.where('detected_at > ?', datetime).count > CSDApp.ip_requests_limit
+  def reached_requests_limit?
+    event.requests.recently_detected.count > CSDApp.ip_requests_limit
   end
 
   # Models objects
