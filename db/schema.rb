@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_08_02_154229) do
     t.string "name", null: false
     t.bigint "address_id", null: false
     t.index ["address_id"], name: "index_events_on_address_id"
-    t.index ["name"], name: "index_events_on_name", unique: true
+    t.index ["name"], name: "index_events_on_name"
   end
 
   create_table "requests", force: :cascade do |t|

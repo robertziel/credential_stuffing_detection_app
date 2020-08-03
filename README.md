@@ -131,6 +131,8 @@ IP_REQUESTS_LIMIT | 10 | Y | limit one IP can make event in period of time (Z)
 SAMPLE_PERIOD | 5 (sec) | Z | period of time in seconds in which limits (Y) and (N) cannot be reached
 IP_EMAILS_LIMIT | 2 | N | emails limit used to cause IP ban
 
+##
+
 ### To improve
 
 * Only data not older than 5 seconds ago in table ***inputs*** are usable, it may be useful removing older ones

@@ -4,7 +4,7 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.string :name, null: false
       t.references :address, foreign_key: true, index: true, null: false
 
-      t.index :name, unique: true
+      t.index :name
     end
   end
 end
