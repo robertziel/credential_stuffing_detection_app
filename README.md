@@ -154,3 +154,9 @@ IP_EMAILS_LIMIT | 2 | N | emails limit used to cause IP ban
 * How can we handle ***DDoS Attack***?
 * IP validation
 * Is it worth running `EventHandler.new(params).save` if address is already banned?
+* Below warnings seems to me sinatra issues `https://github.com/sinatra/sinatra/issues/1590`
+```
+Rails backports are deprecated.
+/Users/robertz/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/sinatra-contrib-2.0.8.1/lib/sinatra/respond_with.rb:226: warning: Using the last argument as keyword parameters is deprecated; maybe ** should be added to the call
+/Users/robertz/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/sinatra-2.0.8.1/lib/sinatra/base.rb:1622: warning: The called method `compile!' is defined here
+```
