@@ -210,34 +210,10 @@ describe EventHandler do
   end
 
   describe '#address' do
-    subject do
-      object.send(:address)
-    end
-
-    context 'when address exists' do
-      before { address }
-
-      it 'returns address' do
-        expect(subject).to eq Address.last
-      end
-
-      it 'does not create new address' do
-        expect { subject }.to change { Address.count }.by(0)
-      end
-    end
-
-    context 'when address does not exist' do
-      it 'returns address' do
-        expect(subject).to eq Address.last
-      end
-
-      it 'creates new address' do
-        expect { subject }.to change { Address.count }
-      end
-    end
+    include_examples :finds_or_creates, :address
   end
 
   describe '#event' do
-    it ''
+    include_examples :finds_or_creates, :event
   end
 end
